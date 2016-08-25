@@ -21,7 +21,7 @@ stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.std
 pidfile "/var/www/sample_mina/shared/tmp/pids/puma.pid"
 stdout_redirect "/var/www/sample_mina/shared/tmp/log/stdout", "/var/www/sample_mina/shared/tmp/log/stderr"
 
-state_path "#{shared_dir}/pids/puma.state"
+#state_path "#{shared_dir}/pids/puma.state"
 activate_control_app
 
 on_worker_boot do
