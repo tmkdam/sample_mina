@@ -10,12 +10,7 @@ require 'mina/git'
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain, 'foobar.com'
-set :deploy_to, '/var/www/foobar.com'
-set :repository, 'git://...'
-set :branch, 'master'
-
-set :user, 'deploy'
+set :user, 'deployer'
 set :domain, 'localhost'
 set :deploy_to, '/var/www/sample_mina'
 set :app_path, lambda { "#{deploy_to}/#{current_path}" }
