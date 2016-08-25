@@ -5,7 +5,7 @@ workers 2
 threads 1, 6
 daemonize true
 
-app_dir = File.expand_path("../..", __FILE__)
+app_dir = "/var/www/sample_mina"
 shared_dir = "#{app_dir}/shared"
 
 # Default to production
