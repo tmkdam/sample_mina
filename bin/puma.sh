@@ -28,7 +28,8 @@ case "$1" in
     echo "Starting puma..."
       rm -f $PUMA_SOCKET
       if [ -e $PUMA_CONFIG_FILE ] ; then
-        bundle exec puma -C $PUMA_CONFIG_FILE
+        #bundle exec puma -C $PUMA_CONFIG_FILE
+        start puma app=/var/www/sample_mina/current
       else
         bundle exec puma
       fi
@@ -48,7 +49,7 @@ case "$1" in
   restart)
     if puma_is_running ; then
       echo "Hot-restarting puma..."
-      kill -9 `cat $PUMA_PID_FILE`
+      kill -s USR2 `cat $PUMA_PID_FILE`
 
       echo "Doublechecking the process restart..."
       sleep 5
