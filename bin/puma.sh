@@ -38,7 +38,7 @@ case "$1" in
 
   stop)
     echo "Stopping puma..."
-      kill -s SIGTERM `cat $PUMA_PID_FILE`
+      kill -s 15 `cat $PUMA_PID_FILE`
       rm -f $PUMA_PID_FILE
       rm -f $PUMA_SOCKET
 
