@@ -28,9 +28,9 @@ case "$1" in
     echo "Starting puma..."
       rm -f $PUMA_SOCKET
       if [ -e $PUMA_CONFIG_FILE ] ; then
-        sudo bundle exec puma -C $PUMA_CONFIG_FILE
+        bundle exec puma -C $PUMA_CONFIG_FILE
       else
-        sudo bundle exec puma
+        bundle exec puma
       fi
 
     echo "done"
