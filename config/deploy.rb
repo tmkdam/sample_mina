@@ -91,6 +91,22 @@ task :deploy => :environment do
   end
 end
 
+desc 'Rollbacks the latest release with restart'
+task rollback: :environment do
+  comment "Rolling back to previous release"
+
+  in_path "#{fetch(:releases_path)}" do
+    # TODO: add check if there are more than 1 release
+    command "rollback_release=`ls -1A | sort -n | tail -n 2 | head -n 1`"
+    comment 'Rollbacking to release: $rollback_release'
+    command "ln -nfs #{fetch(:releases_path)}/$rollback_release #{fetch(:current_path)}"
+    command "current_release=`ls -1A | sort -n | tail -n 1`"
+    comment 'Deleting current release: $current_release'
+    command "rm -rf #{fetch(:releases_path)}/$current_release"
+  end
+  invoke :'puma:restart'
+end
+
 namespace :puma do
   desc "Start the application"
   task :start do
