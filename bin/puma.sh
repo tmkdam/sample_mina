@@ -29,7 +29,8 @@ case "$1" in
       rm -f $PUMA_SOCKET
       if [ -e $PUMA_CONFIG_FILE ] ; then
         #bundle exec puma -C $PUMA_CONFIG_FILE
-        start puma app=/var/www/sample_mina/current
+        #start puma app=/var/www/sample_mina/current
+        puma
       else
         bundle exec puma
       fi
