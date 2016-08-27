@@ -14,16 +14,23 @@ require 'mina/data_sync'
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :user, 'deployer'
-set :domain, 'localhost'
-set :deploy_to, '/var/www/sample_mina'
-set :app_path, lambda { "#{deploy_to}/#{current_path}" }
-set :repository, 'git@github.com:tmkdam/sample_mina.git'
-set :branch, 'master'
-set :forward_agent, true
-set :port, '2222'  
+ 
 
+task :deploy_production => :environment do
+  set :user, 'deployer'
 
+  # Specify all the servers to deploy to , example set :domains, %w[host1 host2 host3] for load balancers
+  set :domain, 'localhost'
+  set :deploy_to, '/var/www/sample_mina'
+  set :app_path, lambda { "#{deploy_to}/#{current_path}" }
+  set :repository, 'git@github.com:tmkdam/sample_mina.git'
+  set :branch, 'master'
+  set :forward_agent, true
+  set :port, '2222' 
+
+  @command_valid = true
+  invoke :deploy
+end
 # Database Sync
 # set :database_path, "config/database.yml"
 # set :remote_backup_path, 'tmp'
