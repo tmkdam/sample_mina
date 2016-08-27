@@ -4,12 +4,14 @@ require 'mina/git'
 # require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 require 'mina/rvm'    # for rvm support. (http://rvm.io)
 require 'mina/puma'
+require "mina/hooks"
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
 #   deploy_to    - Path to deploy into.
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
+after_mina :"puma:phased_restart"
 
 set :user, 'deployer'
 set :domain, 'localhost'
@@ -91,22 +93,6 @@ task :deploy => :environment do
       invoke :'puma:restart'
     end
   end
-end
-
-desc 'Rollbacks the latest release with restart'
-task rollback: :environment do
-  comment "Rolling back to previous release"
-
-  in_path "#{fetch(:releases_path)}" do
-    # TODO: add check if there are more than 1 release
-    command "rollback_release=`ls -1A | sort -n | tail -n 2 | head -n 1`"
-    comment 'Rollbacking to release: $rollback_release'
-    command "ln -nfs #{fetch(:releases_path)}/$rollback_release #{fetch(:current_path)}"
-    command "current_release=`ls -1A | sort -n | tail -n 1`"
-    comment 'Deleting current release: $current_release'
-    command "rm -rf #{fetch(:releases_path)}/$current_release"
-  end
-  invoke :'puma:restart'
 end
 
 # namespace :puma do
