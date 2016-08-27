@@ -63,7 +63,8 @@ case "$1" in
     fi
 
     echo "Trying cold reboot"
-    bin/puma.sh start
+    #bin/puma.sh start
+    puma
     ;;
 
   *)
