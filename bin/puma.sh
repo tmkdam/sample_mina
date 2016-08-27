@@ -29,8 +29,7 @@ case "$1" in
       rm -f $PUMA_SOCKET
       if [ -e $PUMA_CONFIG_FILE ] ; then
         alias proj="cd /var/www/sample_mina/current"
-        #bundle exec puma -C $PUMA_CONFIG_FILE
-        bundle exec pumactl -F config/puma.rb start
+        bundle exec puma -C $PUMA_CONFIG_FILE
         #puma app=/var/www/sample_mina/current
         #puma
       else

@@ -3,6 +3,7 @@ require 'mina/rails'
 require 'mina/git'
 # require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 require 'mina/rvm'    # for rvm support. (http://rvm.io)
+require 'mina/puma'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -108,25 +109,25 @@ task rollback: :environment do
   invoke :'puma:restart'
 end
 
-namespace :puma do
-  desc "Start the application"
-  task :start do
-    queue 'echo "-----> Start Puma"'
-    queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh start" #, :pty => false
-  end
+# namespace :puma do
+#   desc "Start the application"
+#   task :start do
+#     queue 'echo "-----> Start Puma"'
+#     queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh start" #, :pty => false
+#   end
 
-  desc "Stop the application"
-  task :stop do
-    queue 'echo "-----> Stop Puma"'
-    queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh stop"
-  end
+#   desc "Stop the application"
+#   task :stop do
+#     queue 'echo "-----> Stop Puma"'
+#     queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh stop"
+#   end
 
-  desc "Restart the application"
-  task :restart do
-    queue 'echo "-----> Restart Puma"'
-    queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh stop && bundle exec pumactl -F config/puma.rb start"
-  end
-end
+#   desc "Restart the application"
+#   task :restart do
+#     queue 'echo "-----> Restart Puma"'
+#     queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh restart"
+#   end
+# end
 
 # For help in making your deploy script, see the Mina documentation:
 #
