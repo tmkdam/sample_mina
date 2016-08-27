@@ -1,10 +1,12 @@
+require 'mina/tail'
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
-# require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
+require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 require 'mina/rvm'    # for rvm support. (http://rvm.io)
 require 'mina/puma'
-require "mina/hooks"
+require 'mina/nginx'
+require 'mina/data_sync'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -20,6 +22,16 @@ set :repository, 'git@github.com:tmkdam/sample_mina.git'
 set :branch, 'master'
 set :forward_agent, true
 set :port, '2222'  
+
+
+# Database Sync
+# set :database_path, "config/database.yml"
+# set :remote_backup_path, 'tmp'
+# set :local_backup_path, -> { ENV['DATA_SYNC_BACKUP_PATH'] || 'tmp' }
+# set :restore_data, -> { ENV['restore'] || 'true' } # if false will not restore backup
+# set :dump_data, -> { ENV['dump'] || 'true' } # if false will not dump and copy backup
+
+
 # For system-wide RVM install.
 #   set :rvm_path, '/usr/local/rvm/bin/rvm'
 

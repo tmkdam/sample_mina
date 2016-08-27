@@ -13,9 +13,14 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
+
+# Deployment
 gem 'mina'
 gem 'mina-puma', :require => false
-gem 'mina-hooks'
+gem 'mina-tail', require: false
+gem 'mina-nginx', :require => false
+gem 'mina-data_sync', :require => false
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
