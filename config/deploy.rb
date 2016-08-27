@@ -26,7 +26,6 @@ set :forward_agent, true
 set :port, '2222'  
 
 
-
 # Database Sync
 # set :database_path, "config/database.yml"
 # set :remote_backup_path, 'tmp'
