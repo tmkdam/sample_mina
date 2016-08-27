@@ -8,12 +8,6 @@ require 'mina/puma'
 require 'mina/nginx'
 require 'mina/data_sync'
 
-# Basic settings:
-#   domain       - The hostname to SSH to.
-#   deploy_to    - Path to deploy into.
-#   repository   - Git repo to clone from. (needed by mina/git)
-#   branch       - Branch name to deploy. (needed by mina/git)
-
 set :user, 'deployer'
 
 # Specify all the servers to deploy to , example set :domains, %w[host1 host2 host3] for load balancers
@@ -40,11 +34,6 @@ set :port, '2222'
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
 set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'log']
-
-# Optional settings:
-#   set :user, 'foobar'    # Username in the server to SSH to.
-#   set :port, '30000'     # SSH port number.
-#   set :forward_agent, true     # SSH forward_agent.
 
 # This task is the environment that is loaded for most commands, such as
 # `mina deploy` or `mina rake`.
@@ -114,30 +103,3 @@ task :rollback => :environment do
   invoke :"puma:stop"
   invoke :"puma:start"
 end
-
-# namespace :puma do
-#   desc "Start the application"
-#   task :start do
-#     queue 'echo "-----> Start Puma"'
-#     queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh start" #, :pty => false
-#   end
-
-#   desc "Stop the application"
-#   task :stop do
-#     queue 'echo "-----> Stop Puma"'
-#     queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh stop"
-#   end
-
-#   desc "Restart the application"
-#   task :restart do
-#     queue 'echo "-----> Restart Puma"'
-#     queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh restart"
-#   end
-# end
-
-# For help in making your deploy script, see the Mina documentation:
-#
-#  - http://nadarei.co/mina
-#  - http://nadarei.co/mina/tasks
-#  - http://nadarei.co/mina/settings
-#  - http://nadarei.co/mina/helpers
