@@ -20,15 +20,14 @@ threads min_threads_count, max_threads_count
 # Run in background
 daemonize true
 
-
 app_name = "sample_mina"
 app_dir = "/var/www/#{app_name}"
 shared_dir = "#{app_dir}/shared"
 
-# Specifies the `environment` that Puma will run in.
+
 # Default to production
-#
-environment = ENV['RAILS_ENV'] || "production"
+rails_env = ENV['RAILS_ENV'] || "production"
+environment rails_env
 
 # Test for enviorment before enabling
 #preload_app!
@@ -56,5 +55,5 @@ activate_control_app
 on_worker_boot do
   require "active_record"
   ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
-  ActiveRecord::Base.establish_connection(YAML.load_file("#{shared_dir}/config/database.yml")[environment])
+  ActiveRecord::Base.establish_connection(YAML.load_file("#{shared_dir}/config/database.yml")[rails_env])
 end
