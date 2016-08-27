@@ -94,9 +94,13 @@ task :deploy => :environment do
   end
 end
 
-after_mina :"puma:stop"
-after_mina :"puma:start"
-puts after_mina_tasks.inspect
+desc "Rollback with Puma restart"
+task :rollback => :environment do
+  invoke :"deploy:rollback"
+  invoke :"puma:stop"
+  invoke :"puma:start"
+end
+
 # namespace :puma do
 #   desc "Start the application"
 #   task :start do
