@@ -28,6 +28,7 @@ case "$1" in
     echo "Starting puma..."
       rm -f $PUMA_SOCKET
       if [ -e $PUMA_CONFIG_FILE ] ; then
+        cd /var/www/sample_mina/current
         bundle exec puma -C $PUMA_CONFIG_FILE
         #puma app=/var/www/sample_mina/current
         #puma
