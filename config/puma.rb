@@ -24,13 +24,14 @@ app_name = "sample_mina"
 app_dir = "/var/www/#{app_name}"
 shared_dir = "#{app_dir}/shared"
 
-
+# Specifies the `environment` that Puma will run in.
 # Default to production
+#
 rails_env = ENV['RAILS_ENV'] || "production"
 environment rails_env
 
 # Test for enviorment before enabling
-#preload_app!
+preload_app!
 
 # Set up socket location
 bind "unix:///var/www/#{app_name}/shared/tmp/sockets/puma.sock"
