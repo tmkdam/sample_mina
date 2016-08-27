@@ -18,7 +18,7 @@ set :repository, 'git@github.com:tmkdam/sample_mina.git'
 set :branch, 'master'
 set :forward_agent, true
 set :port, '2222'  
-
+#set :term_mode, :nil 
 
 # Database Sync
 # set :database_path, "config/database.yml"
