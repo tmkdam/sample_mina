@@ -15,43 +15,32 @@ workers Integer(ENV['WEB_CONCURRENCY'] || 2)
 #
 min_threads_count = Integer(ENV['RAILS_MIN_THREADS'] || 1)
 max_threads_count = Integer(ENV['RAILS_MAX_THREADS'] || 5)
-threads 1, 5
+threads min_threads_count, max_threads_count
 
 # Run in background
 daemonize true
 
-app_name = "sample_mina"
-app_dir = "/var/www/#{app_name}"
+
+app_dir = "/var/www/sample_mina"
 shared_dir = "#{app_dir}/shared"
 
-# Specifies the `environment` that Puma will run in.
 # Default to production
-#
-environment = ENV['RAILS_ENV'] || "production"
-
-# Test for enviorment before enabling
-#preload_app!
+rails_env = ENV['RAILS_ENV'] || "production"
+environment rails_env
 
 # Set up socket location
-bind "unix:///var/www/#{app_name}/shared/tmp/sockets/puma.sock"
+bind "unix:///var/www/sample_mina/shared/tmp/sockets/puma.sock"
 
 # Logging
 stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
 
 # Set master PID and state locations
-pidfile "/var/www/#{app_name}/shared/tmp/pids/puma.pid"
-stdout_redirect "/var/www/#{app_name}/shared/tmp/log/stdout", "/var/www/#{app_name}/shared/tmp/log/stderr"
+pidfile "/var/www/sample_mina/shared/tmp/pids/puma.pid"
+stdout_redirect "/var/www/sample_mina/shared/tmp/log/stdout", "/var/www/sample_mina/shared/tmp/log/stderr"
 
 state_path "#{shared_dir}/pids/puma.state"
 activate_control_app
 
-# The code in the `on_worker_boot` will be called if you are using
-# clustered mode by specifying a number of `workers`. After each worker
-# process is booted this block will be run, if you are using `preload_app!`
-# option you will want to use this block to reconnect to any threads
-# or connections that may have been created at application boot, Ruby
-# cannot share connections between processes.
-# 
 on_worker_boot do
   require "active_record"
   ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
