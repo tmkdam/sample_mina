@@ -21,7 +21,8 @@ threads min_threads_count, max_threads_count
 daemonize true
 
 
-app_dir = "/var/www/sample_mina"
+app_name = "sample_mina"
+app_dir = "/var/www/#{app_name}"
 shared_dir = "#{app_dir}/shared"
 
 # Default to production
