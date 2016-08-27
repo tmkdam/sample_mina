@@ -64,7 +64,7 @@ case "$1" in
 
     echo "Trying cold reboot"
     #bin/puma.sh start
-    puma app=/var/www/sample_mina/current
+    start puma app=/var/www/sample_mina/current
     ;;
 
   *)
