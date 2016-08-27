@@ -29,7 +29,8 @@ case "$1" in
       rm -f $PUMA_SOCKET
       if [ -e $PUMA_CONFIG_FILE ] ; then
         #bundle exec puma -C $PUMA_CONFIG_FILE
-        puma app=/var/www/sample_mina/current
+        #puma app=/var/www/sample_mina/current
+        puma
       else
         bundle exec puma
       fi
@@ -62,7 +63,8 @@ case "$1" in
     fi
 
     echo "Trying cold reboot"
-    bin/puma.sh start
+    #bin/puma.sh start
+    puma app=/var/www/sample_mina/current
     ;;
 
   *)
