@@ -124,7 +124,7 @@ namespace :puma do
   desc "Restart the application"
   task :restart do
     queue 'echo "-----> Restart Puma"'
-    queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh restart"
+    queue "cd #{app_path} && RAILS_ENV=#{stage} && bin/puma.sh stop && bundle exec pumactl -F config/puma.rb start"
   end
 end
 
