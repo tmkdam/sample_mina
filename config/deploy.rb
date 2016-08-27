@@ -94,7 +94,8 @@ task :deploy => :environment do
   end
 end
 
-after_mina :"puma:hard_restart"
+after_mina :"puma:stop"
+after_mina :"puma:start"
 puts after_mina_tasks.inspect
 # namespace :puma do
 #   desc "Start the application"
