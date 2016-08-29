@@ -19,7 +19,7 @@ max_threads_count = Integer(ENV['RAILS_MAX_THREADS'] || 5)
 threads min_threads_count, max_threads_count
 
 # Use following in production
-if Rails.env.production?
+#if Rails.env.production?
 	# Run in background
 	daemonize true
 
@@ -61,6 +61,6 @@ if Rails.env.production?
 	  ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
 	  ActiveRecord::Base.establish_connection(YAML.load_file("#{shared_dir}/config/database.yml")[rails_env])
 	end
-else
-	puts "Running in Dev mode"
-end
+# else
+# 	puts "Running in Dev mode"
+# end
