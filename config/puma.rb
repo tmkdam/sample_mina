@@ -61,4 +61,6 @@ if Rails.env.production?
 	  ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
 	  ActiveRecord::Base.establish_connection(YAML.load_file("#{shared_dir}/config/database.yml")[rails_env])
 	end
+else
+	puts "Running in Dev mode"
 end
