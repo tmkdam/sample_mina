@@ -79,6 +79,8 @@ GEM
       rake
     mina-data_sync (0.4.1)
       mina (>= 0.3.4)
+    mina-multistage (1.0.2)
+      mina (>= 0.2.1)
     mina-nginx (0.0.1)
       mina (~> 0)
     mina-puma (0.3.1)
@@ -175,6 +177,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   mina
   mina-data_sync
+  mina-multistage
   mina-nginx
   mina-puma
   mina-tail

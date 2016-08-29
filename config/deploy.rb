@@ -1,3 +1,9 @@
+set :stages, %w(development qa sandbox production)
+set :stages_dir, 'config/deploy'
+set :default_stage, 'development'
+
+
+require 'mina/multistage'
 require 'mina/tail'
 require 'mina/bundler'
 require 'mina/rails'
@@ -8,17 +14,7 @@ require 'mina/puma'
 require 'mina/nginx'
 require 'mina/data_sync'
 
-set :user, 'deployer'
-
-# Specify all the servers to deploy to , example set :domains, %w[host1 host2 host3] for load balancers
-set :domain, 'localhost'
-set :deploy_to, '/var/www/sample_mina'
-set :app_path, lambda { "#{deploy_to}/#{current_path}" }
-set :repository, 'git@github.com:tmkdam/sample_mina.git'
-set :branch, 'master'
-set :forward_agent, true
-set :port, '2222'  
-#set :term_mode, :nil 
+#set :term_mode, nil
 
 # Database Sync
 # set :database_path, "config/database.yml"
@@ -91,7 +87,7 @@ task :deploy => :environment do
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
-    to :launch do
+    to :launch => :environment do
       invoke :'puma:restart'
     end
   end

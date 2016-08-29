@@ -20,6 +20,7 @@ gem 'mina-puma', :require => false
 gem 'mina-tail', require: false
 gem 'mina-nginx', :require => false
 gem 'mina-data_sync', :require => false
+gem 'mina-multistage', require: false
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
